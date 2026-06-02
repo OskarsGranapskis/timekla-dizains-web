@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="lv" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viena Nedēļa — Datorikas Studenta Un Vadītāja Dzīvē</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;background:#fff;}
+
+:root{
+  --white:#ffffff;--off:#f7f5f2;--black:#0d0c0a;--mid:#787670;--faint:#e8e5e0;
+  --red:#c0392b;--blue:#1a3a5c;--amber:#d4840a;--green:#2d6a4f;--purple:#7a44c2;
+}
+[data-theme="dark"]{
+  --white:#141210;--off:#1c1a17;--black:#f0ece5;--mid:#a9a6a0;--faint:#e8e5e0;
+  --red:#e05444;--blue:#4a8bbf;--amber:#e8a030;--green:#52b788;--purple:#7a44c2;
+}
+
+#nav{
+  position:fixed;top:0;left:0;right:0;height:50px;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+  background:var(--white);border-bottom:1px solid var(--faint);
+  transition:background .4s,border-color .4s;
+}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:.05em;color:var(--black);text-transform:uppercase;}
+.nav-center{display:flex;gap:.15rem;}
+.nav-btn{
+  background:none;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;
+  font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--mid);padding:.3rem .6rem;border-radius:4px;transition:all .2s;
+}
+.nav-btn:hover,.nav-btn.on{color:var(--black);}
+.nav-btn.on{background:var(--faint);}
+[data-theme="dark"] .nav-btn.on{background:var(--mid);}
+.theme-btn{
+  background:none;border:1px solid var(--faint);border-radius:6px;
+  cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:.7rem;
+  font-weight:500;color:var(--mid);padding:.28rem .7rem;letter-spacing:.04em;
+  transition:all .2s;
+}
+.theme-btn:hover{color:var(--black);border-color:var(--mid);}
+
+#prog{position:fixed;bottom:0;left:0;height:3px;background:var(--red);z-index:999;transition:width .6s cubic-bezier(.4,0,.2,1);}
+
+#dots{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:999;display:flex;flex-direction:column;gap:8px;}
+.d{width:7px;height:7px;border-radius:50%;border:1.5px solid var(--mid);background:transparent;cursor:pointer;transition:all .3s;padding:0;}
+.d.on{background:var(--black);border-color:var(--black);}
+[data-theme="light"] .d.last.on{background:var(--white);border-color:var(--white);}
+
+#wrap{position:fixed;top:50px;left:0;right:0;bottom:0;overflow:hidden;}
+#track{position:absolute;top:0;left:0;right:0;transition:transform .8s cubic-bezier(.77,0,.175,1);will-change:transform;}
+.sec{height:calc(100vh - 50px);width:100%;overflow:hidden;position:relative;}
+
+/* Sākums */
+#s0{background:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+#s0 .eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:2rem;}
+#s0 h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);font-weight:400;line-height:1.05;letter-spacing:-.03em;color:var(--black);margin-bottom:1.5rem;}
+#s0 h1 em{font-style:italic;color:var(--red);}
+#s0 .desc{font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--mid);max-width:420px;line-height:1.75;margin-bottom:1.5rem;}
+#s0 .pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+#s0 .pill{
+  font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.04em;
+  padding:.45rem 1.1rem;border:1px solid var(--faint);border-radius:100px;color:var(--mid);
+  background:none;cursor:pointer;transition:all .2s;
+}
+#s0 .pill:hover{border-color:var(--black);color:var(--black);}
+#s0 .byline{font-family:'Space Grotesk',sans-serif;font-size:.72rem;color:var(--mid);margin-top:0.5rem;letter-spacing:.03em;}
+#s0 .scroll-hint{
+  font-family:'Space Grotesk',sans-serif;font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mid);display:flex;align-items:center;gap:.5rem;
+}
+#s0 .scroll-hint::before{content:'';width:1px;height:24px;background:var(--mid);opacity:.4;}
+
+/* Pirmdiena */
+#s1{display:grid;grid-template-columns:1fr 1fr;}
+#s1 .left{
+  background:var(--black);padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;
+  border-right:1px solid var(--faint);
+}
+#s1 .left .day-num{font-family:'Syne',sans-serif;font-weight:800;font-size:8rem;line-height:.9;color:var(--faint);opacity:.4;margin-bottom:1.5rem;}
+#s1 .left .day-tag{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;}
+#s1 .left h2{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;line-height:1.1;color:var(--white);margin-bottom:1.2rem;letter-spacing:-.02em;}
+#s1 .left p{font-family:'Space Grotesk',sans-serif;font-size:.9rem;color:var(--mid);line-height:1.75;max-width:340px;}
+#s1 .left .stats{display:flex;gap:2rem;margin-top:2rem;}
+#s1 .left .st-n{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--red);}
+#s1 .left .st-l{font-family:'Space Grotesk',sans-serif;font-size:.65rem;color:var(--mid);letter-spacing:.04em;}
+#s1 .right{background:var(--off);padding:3rem 2.5rem;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;}
+.timeline-item{display:grid;grid-template-columns:60px 1fr;gap:0 1rem;padding:1rem 0;border-bottom:1px solid var(--faint);align-items:start;}
+.timeline-item:last-child{border-bottom:none;}
+.tl-time{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--mid);padding-top:.15rem;}
+.tl-title{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:500;color:var(--black);margin-bottom:.25rem;}
+.tl-body{font-family:'Space Grotesk',sans-serif;font-size:.78rem;color:var(--mid);line-height:1.6;}
+[data-theme="dark"] #s1 .left{background:#0a0908;}
+[data-theme="dark"] #s1 .left h2{color:#f0ece5;}
+[data-theme="dark"] #s1 .right{background:#1c1a17;}
+
+/* Otrdiena */
+#s2{background:var(--blue);display:flex;flex-direction:column;justify-content:center;padding:4rem 4vw;overflow-y:auto;}
+#s2 .s2-header{margin-bottom:1rem;}
+#s2 .day-tag{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.8rem;}
+#s2 h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.5rem,5vw,4.5rem);color:#fff;line-height:1.05;letter-spacing:-.02em;margin-bottom:1rem;}
+#s2 .sub{font-family:'Space Grotesk',sans-serif;font-size:.95rem;color:rgba(255,255,255,.55);max-width:480px;line-height:1.7;}
+#s2 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;}
+.s2-card{background:rgba(255,255,255,.06);padding:1.4rem 1.2rem;transition:background .2s;}
+.s2-card:hover{background:rgba(255,255,255,.1);}
+.s2-card .c-icon{font-size:1.3rem;margin-bottom:.6rem;opacity:.8;}
+.s2-card .c-title{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;color:#fff;margin-bottom:.4rem;}
+.s2-card .c-body{font-family:'Space Grotesk',sans-serif;font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.6;}
+[data-theme="dark"] #s2{background:#0e2035;}
+
+/* Trešdiena */
+#s3{background:var(--amber);display:grid;grid-template-columns:1fr 1.1fr;}
+#s3 .vis{overflow:hidden;}
+#s3 .vis img{width: 100%;height: 100%;object-fit: cover;opacity:.5;}
+#s3 .content{background:var(--white);padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;}
+#s3 .day-tag{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:.8rem;}
+#s3 h2{font-family:'Libre Baskerville',serif;font-size:2.4rem;font-weight:700;line-height:1.15;color:var(--black);margin-bottom:1rem;letter-spacing:-.01em;}
+#s3 h2 em{font-style:italic;}
+#s3 .desc{font-family:'Space Grotesk',sans-serif;font-size:.88rem;color:var(--mid);line-height:1.75;max-width:500px;margin-bottom:1.5rem;}
+.route{display:flex;flex-direction:column;gap:0;}
+.r-item{display:flex;align-items:flex-start;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--faint);}
+.r-item:last-child{border-bottom:none;}
+.r-dot{width:10px;height:10px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:.3rem;}
+.r-title{font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:500;color:var(--black);margin-bottom:.15rem;}
+.r-detail{font-family:'Space Grotesk',sans-serif;font-size:.72rem;color:var(--mid);}
+.journey-stats{display:flex;gap:2rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--faint);}
+.j-stat .jn{font-family:'Libre Baskerville',serif;font-size:1.5rem;color:var(--amber);}
+.j-stat .jl{font-family:'Space Grotesk',sans-serif;font-size:.65rem;color:var(--mid);letter-spacing:.03em;}
+[data-theme="dark"] #s3{background:#2a1e00;}
+[data-theme="dark"] #s3 .content{background:#141210;}
+
+/* Ceturtdiena */
+#s4{background:var(--off);padding:4rem 5vw;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;}
+#s4 .s4-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
+#s4 .day-tag{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;}
+#s4 h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.5rem,4vw,3rem);color:var(--black);letter-spacing:-.02em;line-height:1.05;}
+#s4 .quote-pull{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;color:var(--mid);max-width:340px;line-height:1.6;border-left:2px solid var(--green);padding-left:1rem;}
+#s4 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.g-card{
+  background:var(--white);border:1px solid var(--faint);border-radius:12px;
+  padding:1.4rem;position:relative;overflow:hidden;transition:transform .2s;
+}
+.g-card:hover{transform:translateY(-3px);}
+.g-card::before{content:attr(data-n);position:absolute;bottom:-.2em;right:.1em;font-family:'Syne',sans-serif;font-weight:800;font-size:5rem;color:var(--faint);line-height:1;pointer-events:none;transition:color .4s;}
+.g-card .c-time{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--green);margin-bottom:.6rem;}
+.g-card h3{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;color:var(--black);margin-bottom:.4rem;line-height:1.3;}
+.g-card p{font-family:'Space Grotesk',sans-serif;font-size:.75rem;color:var(--mid);line-height:1.6;position:relative;z-index:1;}
+[data-theme="dark"] #s4{background:#111009;}
+[data-theme="dark"] .g-card{background:#1c1a17;border-color:#2a2824;}
+[data-theme="dark"] .g-card::before{color:#2a2824;}
+
+/* Piektdiena */
+#s5{background:var(--black);display:flex;align-items:center;justify-content:center;}
+#s5 .inner{max-width:900px;width:100%;padding:0 4rem;}
+#s5 .day-tag{font-family:'Space Grotesk',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-bottom:1.5rem;}
+#s5 h2{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:400;font-style:italic;color:var(--white);line-height:1.1;letter-spacing:-.02em;margin-bottom:2rem;}
+#s5 .big-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;margin-bottom:1rem;}
+.b-stat{padding:1.5rem 1rem;text-align:center;background:rgba(255,255,255,.03);}
+.b-n{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--purple);line-height:1;margin-bottom:.4rem;}
+.b-l{font-family:'Space Grotesk',sans-serif;font-size:.68rem;color:rgba(255,255,255,.35);letter-spacing:.06em;text-transform:uppercase;}
+#s5 .reflection{display:grid;grid-template-columns:1fr;gap:2rem;align-items:start;}
+.r-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--white);line-height:1.55;letter-spacing:-.01em;padding-left:1.5rem;border-left:2px solid var(--purple);}
+.r-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.r-list li{font-family:'Space Grotesk',sans-serif;font-size:.8rem;color:rgba(255,255,255,.5);padding-left:1.2rem;position:relative;line-height:1.6;}
+.r-list li::before{content:'→';position:absolute;left:0;color:var(--purple);}
+[data-theme="dark"] #s5{background:#0a0908;}
+[data-theme="dark"] #s5 h2{color:#f0ece5;}
+[data-theme="dark"] #s5 .r-quote{color:#f0ece5;}
+
+#counter{position:fixed;bottom:1.8rem;left:2rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--mid);z-index:999;letter-spacing:.04em;}
+
+@media(max-width:768px){
+  #s1,#s3{grid-template-columns:1fr;}
+  #s1 .left{padding:2.5rem 1.5rem;}
+  #s1 .left .day-num{font-size:5rem;}
+  #s1 .right,#s3 .content{padding:2rem 1.5rem;}
+  #s3 .vis{display:none;}
+  #s2{padding:3rem 1.5rem;}
+  #s4{padding:3rem 1.5rem;}
+  #s4 .grid{grid-template-columns:1fr 1fr;}
+  #s4 .s4-head{flex-direction:column;align-items:flex-start;}
+  #s5 .inner{padding:0 1.5rem;}
+  #s5 .big-row{grid-template-columns:repeat(2,1fr);}
+  #s5 .reflection{grid-template-columns:1fr;}
+  .nav-center{display:none;}
+  #dots{display:none;}
+}
+
+.sec .anim{opacity:0;transform:translateY(22px);transition:opacity .65s ease .2s,transform .65s ease .2s;}
+.sec.active .anim{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<!-- Navigācija -->
+<nav id="nav">
+  <div class="nav-center">
+    <button class="nav-btn on" onclick="go(0)">Sākums</button>
+    <button class="nav-btn" onclick="go(1)">Pirmdiena</button>
+    <button class="nav-btn" onclick="go(2)">Otrdiena</button>
+    <button class="nav-btn" onclick="go(3)">Trešdiena</button>
+    <button class="nav-btn" onclick="go(4)">Ceturtdiena</button>
+    <button class="nav-btn" onclick="go(5)">Piektdiena</button>
+  </div>
+  <button class="theme-btn" id="tbtn" onclick="toggleTheme()">☾ Tumšais</button>
+</nav>
+
+<div id="dots">
+  <button class="d on" onclick="go(0)" title="Sākums"></button>
+  <button class="d" onclick="go(1)" title="Pirmdiena"></button>
+  <button class="d" onclick="go(2)" title="Otrdiena"></button>
+  <button class="d" onclick="go(3)" title="Trešdiena"></button>
+  <button class="d" onclick="go(4)" title="Ceturtdiena"></button>
+  <button class="d last" onclick="go(5)" title="Piektdiena"></button>
+</div>
+
+<div id="counter">01 / 06</div>
+<div id="prog" style="width:0%"></div>
+
+<div id="wrap">
+<div id="track">
+
+<!-- Sākums -->
+<section class="sec active" id="s0">
+  <h1 class="anim">Viena<br><em>darba</em><br>nedēļa</h1>
+  <p class="desc anim">Esmu Oskars Granapskis. <br>Vadu izstrādes nodaļu un paralēli studēju LU datoriku. <br>Šī ir mana nedēļa.</p>
+  <div class="pills anim">
+    <button class="pill" onclick="go(1)">Pirmdiena →</button>
+    <button class="pill" onclick="go(2)">Otrdiena →</button>
+    <button class="pill" onclick="go(3)">Trešdiena →</button>
+    <button class="pill" onclick="go(4)">Ceturtdiena →</button>
+    <button class="pill" onclick="go(5)">Piektdiena →</button>
+  </div>
+</section>
+
+<!-- Pirmdiena -->
+<section class="sec" id="s1">
+  <div class="left">
+    <div class="day-num anim">01</div>
+    <div class="day-tag anim">Pirmdiena</div>
+    <h2 class="anim">Viens Oskars,<br>divas pasaules</h2>
+    <p class="anim">Rīts - nodaļai. Pēcpusdiena - auditorijām. <br>Starp abiem - 53. tramvajs, kurā pārslēdzos no vadītāja uz studentu.</p>
+  </div>
+  <div class="right">
+    <div class="timeline-item anim"><div class="tl-time">07:30</div><div><div class="tl-title">Darba e-pasts un Microsoft Teams paziņojumi</div><div class="tl-body">Kafija, divi monitori, pieteikti jauni uzdevumi. Microsoft Teams paziņojumi piepilda jau ekrānu pirms vēl diena ir sākusies. Apkopoju prioritātes.</div></div></div>
+    <div class="timeline-item anim"><div class="tl-time">08:30</div><div><div class="tl-title">Sarežģītāko uzdevumu izstrāde un IT vadības sapulce</div><div class="tl-body">Šodien arī pats rakstu kodu. Microsoft Teams paliek fonā un tiek pārbaudīts tikai tad, ja uzrodas kas patiešām steidzams - šādi gadījumi gan mēdz uzrasties bieži. Pa vidu izstrādei ir arī IT vadības sapulce, kur tiek apspriestas nodaļas aktualitātes, turpmākie soļi, pieņemti tehniski lēmumi.</div></div></div>
+    <div class="timeline-item anim"><div class="tl-time">12:30</div><div><div class="tl-title">Pusdienas pirms sapulcēm</div><div class="tl-body">Ēdu un pārbaudu neizlaistās ziņas - komunicēju ar komandu.</div></div></div>
+    <div class="timeline-item anim"><div class="tl-time">13:00</div><div><div class="tl-title">Individuālas sarunas ar izstrādātājiem</div><div class="tl-body">Fokuss uz progresu, šķēršliem un izaugsmi. Palīdzu risināt tehniskos un organizatoriskos jautājumus. Kas ir paveikts? Kādi plāni? Vai nepieciešama palīdzība?</div></div></div>
+    <div class="timeline-item anim"><div class="tl-time">16:30</div><div><div class="tl-title">Lekcija un laboratorijas darbi "DBPS Oracle"</div><div class="tl-body">Lekcija ir labs atgādinājums tam, ko jau izmantoju ikdienā.</div></div></div>
+  </div>
+</section>
+
+<!-- Otrdiena -->
+<section class="sec" id="s2">
+  <div class="s2-header anim">
+    <div class="day-tag">02 · Otrdiena</div>
+    <h2>Digitālā soma</h2>
+    <p class="sub">Microsoft Teams, VS Code. <br>Studenta un vadītāja ekrāni nav tik atšķirīgi.</p>
+  </div>
+  <div class="cards anim">
+    <div class="s2-card">
+      <div class="c-icon">⌨️</div>
+      <div class="c-title">VS Code</div>
+      <div class="c-body">Tūkstošiem rindiņu ar kodu, kuras tūkstošiem reizes lasītas. Vēljoprojām pārlasu, kad jāsāk jauns uzdevums.</div>
+    </div>
+    <div class="s2-card">
+      <div class="c-icon">📚</div>
+      <div class="c-title">E-studijas</div>
+      <div class="c-body">Uzdevumu iesniegšana, atzīmes, kursa materiāli. Pārbaudīju, ir pieejams arī divos naktī - studiju darbi var turpināties jebkurā diennakts laikā.</div>
+    </div>
+    <div class="s2-card">
+      <div class="c-icon">💼</div>
+      <div class="c-title">Microsoft Teams</div>
+      <div class="c-body">Darba sapulces no LU datorikas fakultātes klusākā stūra. Kameras slēgšana neobligāta? Perfekti! Ļauj vairāk koncentrēties uz saturu nekā fonu.</div>
+    </div>
+    <div class="s2-card">
+      <div class="c-icon">💻</div>
+      <div class="c-title">Gitlab</div>
+      <div class="c-body">Vairāki projekti, vairāki uzdevumi, kuriem jāveic pārbaude. Tas prasa disciplīnu, lai neapmaldītos starp projektiem, īpaši, ja darbs aktīvi notiek vairākos projektos.</div>
+    </div>
+    <div class="s2-card">
+      <div class="c-icon">📡</div>
+      <div class="c-title">Outlook</div>
+      <div class="c-body">Darba komunikācija neapstājas pat lekciju laikā. Biju spiests iemācīties šķirot steidzamo no tā kas var pagaidīt - ļoti noderīgi.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Trešdiena -->
+<section class="sec" id="s3">
+  <div class="vis anim">
+    <img src="paralelais_darbs.jpeg" />
+  </div>
+  <div class="content">
+    <div class="day-tag anim">03 · Trešdiena</div>
+    <h2 class="anim">Paralēlais <em>darbs</em></h2>
+    <p class="desc anim">Lielākā daļa dienas aizrit lekcijās, bet darbs nekur nepazūd, tāpēc vienlaikus jāpievērš uzmanība arī tam, jo citu opciju nav. Šī ir grūtākā nedēļas diena, bet esmu iemācījies to samenedžēt tā, lai viss aizritētu veiksmīgi. Tas nozīmē ātru fokusa maiņu, reakciju uz dažādām situācijām. Strikti jāizvērtē, kam ir lielākā nozīme darba vidē, it īpaši šobrīd, kad norisinās aktīva projekta izstrāde un ātri vien tiek definētas jaunas prasības. IT vide ir ļoti mainīga, pie tā ir jāpierod un jāspēj pielāgoties. Tas ir liels slogs, bet tas palīdz attīstīt disciplīnu un spēju strādāt spiediena apstākļos, kas noder arī ikdienā. Diena noslēgta ar uzvaru abās vidēs.</p>
+    <div class="route anim">
+      <div class="r-item"><div class="r-dot"></div><div><div class="r-title">Oskars 1, Lekcijas 0</div><div class="r-detail">Lekcijas pieveiktas.</div></div></div>
+      <div class="r-item"><div class="r-dot"></div><div><div class="r-title">Oskars 1, Darbs 0</div><div class="r-detail">Darbs pieveikts.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Ceturtdiena -->
+<section class="sec" id="s4">
+  <div class="s4-head">
+    <div>
+      <div class="day-tag anim">04 · Ceturtdiena</div>
+      <h2 class="anim">Tiešsaistes lekcijas —<br>labākās lekcijas</h2>
+    </div>
+    <p class="quote-pull anim">Portatīvais dators nav īsts dators <br>- lektors</p>
+  </div>
+  <div class="grid">
+    <div class="g-card anim" data-n="1"><div class="c-time">07:45</div><h3>Uzdevumu izstrāde, izstrādātaju asistēšana</h3><p>Izstrādāju paaugstinātas grūtības uzdevumus (ja sanāk laika) vai arī risinu kritiskus incidentus, lai palīdzētu ar projekta virzību. Daļa dienas tiek veltīta komandas atbalstam, palīdzot pieņemt tehniskos lēmumus. Šis punkts ir dinamisks, bieži tiek aizstāts ar sapulcēm.</p></div>
+    <div class="g-card anim" data-n="2"><div class="c-time">11:00</div><h3>Uzkrātā Gitlab koda pārskatīšana, plānošana</h3><p>Dalos ar savu pieredzi ar izstrādātājiem, rakstu komentārus un norādu uz izveidoto koda standartu failu. Tas mums palīdz kļūt tikai stiprākiem un attīstīt zināšanas, ievērojot labos principus un vienotu pieeju kodēšanai. Paralēli veicu arī darbu plānošanu - sazinos ar biznesa analītiķiem, projekta vadītājiem un nosaku prioritātes, sadalīšanu, lai nodrošinātu efektīvu resursu izmantošanu.</p></div>
+    <div class="g-card anim" data-n="3"><div class="c-time">14:00</div><h3>Sapulce ar datu inženieri</h3><p>Inženierim nepieciešama palīdzība datu iegūšanā no sistēmas atskaitei, savukārt mums nepieciešami ārējie dati sistēmai. Tas tiek apspriests no tehniskās puses un notiek draudzīga apmaiņa.</p></div>
+    <div class="g-card anim" data-n="4"><div class="c-time">15:00</div><h3>Sporta zāle</h3><p>Nav lekciju, nav Microsoft Teams paziņojumu. Tikai es, mūzika un skrejceļš pēc kura seko trenažieri.</p></div>
+    <div class="g-card anim" data-n="5"><div class="c-time">16:30</div><h3>Objektorientētās programmēšanas lekcija</h3><p>Tiešsaistes lekcija - ļauj vieglāk apvienot studijas ar darbu. Ar programmēšanu saskaros katru dienu un šis to papildina.</p></div>
+    <div class="g-card anim" data-n="6"><div class="c-time">20:00</div><h3>Basketbola treniņš</h3><p>Dēļ šī gaidu ceturtdienu visvairāk. Varu attīstīt savas prasmes sportā, kurš mani ļoti piesaista.</p></div>
+  </div>
+</section>
+
+<!-- Piektdiena -->
+<section class="sec" id="s5">
+  <div class="inner">
+    <div class="day-tag anim">05 · Piektdiena</div>
+    <h2 class="anim">Nedēļas pārskats</h2>
+    <div class="big-row anim">
+      <div class="b-stat"><div class="b-n">15</div><div class="b-l">Lekciju stundas</div></div>
+      <div class="b-stat"><div class="b-n">30</div><div class="b-l">Darba stundas</div></div>
+      <div class="b-stat"><div class="b-n">30</div><div class="b-l">Miega stundas</div></div>
+      <div class="b-stat"><div class="b-n">5</div><div class="b-l">Sporta stundas</div></div>
+    </div>
+    <div class="reflection anim">
+      <ul class="r-list">
+        <li>Darba un studiju apvienošana prasa daudz pacietības un prioritāšu noteikšanu, taču iegūtā pieredze ir tā vērta. Tiešām novērtēju to, cik daudz esmu iemācījies. Teiciens "Mūžu dzīvo, mūžu mācies" varētu būt IT industrijas moto.</li>
+        <li>Tiešsaistes lekcijas ir glābējs studiju apvienošanai ar darbu. Bez tām noteikti būtu grūti iztikt, it īpaši šajā pozīcijā.</li>
+        <li>Katru nedēļu izdodas atrast arī laiku sportam. Tas ir vienīgais laiks, kad patiešām esmu bezsaistē un varu atslēgties no darba un studijām. Tas palīdz relaksēties.</li>
+        <li>Lielākā daļa darba nedēļas tiek veltīta komandas vadībai. Izstrāde tiek veikta tikai, kad sanāk laiks, lai palīdzētu ar tehniski grūtākajiem uzdevumiem.</li>
+        <li>Nedēļas beigās ir gandarījums redzēt progresu gan universitātē, gan darbā. Katra diena ir arvien tuvāk izvirzītajiem mērķiem. Šobrīd mērķi virzās strauji uz priekšu un iekļaujas noteiktajos termiņos. Liels paldies arī maniem izstrādātājiem!</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script>
+const secs=document.querySelectorAll('.sec');
+const track=document.getElementById('track');
+const dots=document.querySelectorAll('.d');
+const navBtns=document.querySelectorAll('.nav-btn');
+const counter=document.getElementById('counter');
+const prog=document.getElementById('prog');
+const labels=['Sākums','Pirmdiena','Otrdiena','Trešdiena','Ceturtdiena','Piektdiena'];
+let cur=0,busy=false;
+
+function go(n){
+  if(n<0||n>=secs.length||n===cur||busy)return;
+  busy=true;
+  secs[cur].classList.remove('active');
+  cur=n;
+  track.style.transform=`translateY(-${cur*(100/(secs.length))*secs.length}vh)`;
+  track.style.transform=`translateY(calc(-${cur} * (100vh - 50px)))`;
+  secs[cur].classList.add('active');
+  dots.forEach((d,i)=>{d.classList.toggle('on',i===cur);});
+  navBtns.forEach((b,i)=>{b.classList.toggle('on',i===cur);});
+  counter.textContent=String(cur+1).padStart(2,'0')+' / 0'+secs.length;
+  prog.style.width=(cur/(secs.length-1)*100)+'%';
+  setTimeout(()=>{busy=false;},820);
+}
+
+window.addEventListener('wheel',e=>{
+  if(busy)return;
+  if(e.deltaY>25)go(cur+1);
+  else if(e.deltaY<-25)go(cur-1);
+},{passive:true});
+
+let ty=null;
+window.addEventListener('touchstart',e=>{ty=e.touches[0].clientY;},{passive:true});
+window.addEventListener('touchend',e=>{
+  if(ty===null)return;
+  const d=ty-e.changedTouches[0].clientY;
+  if(Math.abs(d)>40)go(d>0?cur+1:cur-1);
+  ty=null;
+},{passive:true});
+
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'||e.key==='PageDown')go(cur+1);
+  if(e.key==='ArrowUp'||e.key==='PageUp')go(cur-1);
+});
+
+function toggleTheme(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('tbtn').textContent=dark?'☾ Tumšais':'☀ Gaišais';
+}
+</script>
+</body>
+</html>
